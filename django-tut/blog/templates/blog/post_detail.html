@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+      
+        	<div>
+        	<p><i>{{ post.author }}</i></p>
+        	<p>{{ post.title|upper }}</p>
+        	<p>{{ post.text }}</p>
+        	
+        	</div>
+    
+  {% endblock %}
