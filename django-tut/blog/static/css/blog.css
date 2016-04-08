@@ -1,0 +1,12 @@
+h1{
+	font-style:italic;
+	border:2px;
+	color:red;
+	text-shadow: 2px 2px 2px black;
+}
+
+.alert{
+
+border-radius:2em;
+
+}

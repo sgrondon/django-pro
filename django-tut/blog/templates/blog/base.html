@@ -1,14 +1,28 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
     <title></title>
+     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
 </head>
 <body>
+<div class="jumbotron">
+	<div class="container">
+	<h1>Mi Blog</h1>
+	</div>
+</div>
+<div class="container">
 
+<div class="alert alert-warning alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>HOla!</strong> Bienvenido a Django</div>
 
+<a href="{% url 'blog.views.post_new' %}">Nuevo Post</a>
 <h1>Esta es la plantilla base.html</h1>
 {% block content %}
 {% endblock %}
-
+</div>
 </body>
 </html>
