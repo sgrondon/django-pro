@@ -2,12 +2,24 @@
 
 {% block content %}
       
-        	<div>
+        	<div class="row">
         	<a href="{% url 'post_edit' pk=post.pk %}">Editar</a>
         	<p><i>{{ post.author }}</i></p>
         	<p>{{ post.title|upper }}</p>
         	<p>{{ post.text }}</p>
         	
         	</div>
-    
+        	<div class="row">
+        	<form method="POST" class="post-form">
+        	{% csrf_token %} <!--Para seguridad-->
+          	{{ form.as_p }} <!--Muestra todos los campos en parrafos-->
+           <button type="submit" class="save btn btn-default">Save</button>
+        	</form>
+        	</div>
+    		<div class="row">
+    			{% for comment in comments %}	
+    				<p>{{ comment.text }}</p>
+    				<p>{{ comment.create_date }}</p>
+    			{% endfor %}
+    		</div>
   {% endblock %}
