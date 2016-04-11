@@ -18,9 +18,9 @@
 <div class="alert alert-warning alert-dismissible" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   <strong>HOla!</strong> Bienvenido a Django</div>
-
-<a href="{% url 'blog.views.post_new' %}">Nuevo Post</a>
 <h1>Esta es la plantilla base.html</h1>
+<a class ="btn btn-primary" href="{% url 'blog.views.post_new' %}">Nuevo Post</a>
+
 {% block content %}
 {% endblock %}
 </div>

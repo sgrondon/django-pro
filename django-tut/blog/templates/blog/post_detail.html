@@ -3,7 +3,8 @@
 {% block content %}
       
         	<div class="row">
-        	<a href="{% url 'post_edit' pk=post.pk %}">Editar</a>
+        	<a class="btn btn-primary" href="{% url 'post_delete' pk=post.pk %}">BORRAR</a>
+        	<a class="btn btn-primary" href="{% url 'post_edit' pk=post.pk %}">Editar</a>
         	<p><i>{{ post.author }}</i></p>
         	<p>{{ post.title|upper }}</p>
         	<p>{{ post.text }}</p>
