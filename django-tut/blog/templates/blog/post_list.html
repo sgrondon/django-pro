@@ -5,7 +5,7 @@
         	<div class="row">
         		<div class="col-md-4">
 	        	<p><i>{{ post.author }}</i></p>
-	        	<p><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title|upper }}</a></p> <!--{%} Template tags-->
+	        <p><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title|upper }}</a></p> <!--{%} Template tags-->
 	        	<p>{{ post.text }}</p>
 	        	</div>
 	        	<div class="col-md-8">

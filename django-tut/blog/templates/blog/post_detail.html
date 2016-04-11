@@ -1,5 +1,5 @@
 {% extends 'blog/base.html' %}
-
+{% load crispy_forms_tags %}
 {% block content %}
       
         	<div class="row">
@@ -12,7 +12,7 @@
         	<div class="row">
         	<form method="POST" class="post-form">
         	{% csrf_token %} <!--Para seguridad-->
-          	{{ form.as_p }} <!--Muestra todos los campos en parrafos-->
+          	{{ form | crispy }} <!--Muestra todos los campos en parrafos-->
            <button type="submit" class="save btn btn-default">Save</button>
         	</form>
         	</div>
