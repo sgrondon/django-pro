@@ -10,17 +10,7 @@
         	<p>{{ post.text }}</p>
         	
         	</div>
-        	<div class="row">
-        	<form method="POST" class="post-form">
-        	{% csrf_token %} <!--Para seguridad-->
-          	{{ form | crispy }} <!--Muestra todos los campos en parrafos-->
-           <button type="submit" class="save btn btn-default">Save</button>
-        	</form>
-        	</div>
-    		<div class="row">
-    			{% for comment in comments %}	
-    				<p>{{ comment.text }}</p>
-    				<p>{{ comment.create_date }}</p>
-    			{% endfor %}
-    		</div>
+        {% include 'blog/snippets/comment.html' %}
+
+
   {% endblock %}

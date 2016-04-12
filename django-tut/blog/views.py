@@ -4,12 +4,17 @@ from django.utils import timezone
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 # Create your views here.
+
+
+
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     #import ipdb; ipdb.set_trace() Punto de ruptura
     return render(request, 'blog/post_list.html', {"posts" : posts})
+
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -31,7 +36,7 @@ def post_detail(request, pk):
     return render(request, 'blog/post_detail.html', {"post" : post, 
                                                     "comments" : comments, 
                                                     "form" : form})
-
+@login_required(login_url='login')
 def post_new(request):
     if request.method == "POST":
         form = PostForm(request.POST)
@@ -44,6 +49,7 @@ def post_new(request):
     else:
         form = PostForm()
     return render(request, 'blog/post_edit.html', {'form': form})
+
 
 def post_edit(request, pk):
         post = get_object_or_404(Post, pk=pk)
@@ -58,6 +64,7 @@ def post_edit(request, pk):
             form = PostForm(instance=post)
         return render(request, 'blog/post_edit.html', {'form': form})
 
+@login_required(login_url='login')
 def post_delete(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.delete()
