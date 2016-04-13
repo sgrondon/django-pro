@@ -9,6 +9,10 @@ border-radius:2em;
 
 }
 
+.navbar{
+    height: 12em;
+}
+
 .page-header {
         background-color: #ff9400;
         margin-top: 0;

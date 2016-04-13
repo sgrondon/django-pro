@@ -9,7 +9,6 @@ from django.contrib.auth.decorators import login_required
 
 
 
-
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     #import ipdb; ipdb.set_trace() Punto de ruptura
@@ -24,11 +23,11 @@ def post_detail(request, pk):
         form = CommentForm(request.POST)
 
         if form.is_valid():
-            comment = form.save(commit=False)
-            comment.author = request.user
-            comment.post = post
-            comment.save()
-            return redirect('blog.views.post_detail', pk=post.pk)
+            comments = form.save(commit=False)
+            comments.author = request.user
+            comments.post = post
+            comments.save()
+            return redirect('post_detail', pk=post.pk)
     else:
         form = CommentForm()
 
@@ -62,7 +61,7 @@ def post_edit(request, pk):
                 return redirect('blog.views.post_detail', pk=post.pk)
         else:
             form = PostForm(instance=post)
-        return render(request, 'blog/post_edit.html', {'form': form})
+        return render(request, 'blog/post_edit.html', {'form': form, 'post' : post})
 
 @login_required(login_url='login')
 def post_delete(request, pk):

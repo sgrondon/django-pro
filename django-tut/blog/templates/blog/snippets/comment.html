@@ -9,7 +9,9 @@
         	</div>
     		<div class="row">
     			{% for comment in comments %}	
+
     				<p>{{ comment.text }}</p>
     				<p>{{ comment.create_date }}</p>
+                    <p>{{ comment.author }}</p>
     			{% endfor %}
     		</div>
