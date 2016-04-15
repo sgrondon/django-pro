@@ -15,18 +15,20 @@
     <div class="navbar-header">
       <a class="navbar-brand" href="{% url 'post_list' %}"> <!--Para volver al inicio-->
         Dejango Blog
-	<a type="button" class="btn btn-warning navbar-btn navbar-right" href="blog/sobremi.html">Logout</a>
+	
 
       </a>
       </div>
 
       <div class="collapse navbar-collapse">
-	{% if user.is_authenticated %}
+
+     
+	<{% if user.is_authenticated %}
 	<a type="button" class="btn btn-warning navbar-btn navbar-right" href="{% url 'logout' %}">Logout</a>
 	{% else %}
 
 	
-
+	
 
 
 				 <a type="button" class="btn btn-default navbar-btn navbar-right" href="{% url 'login' %}">Login</a>
@@ -68,10 +70,10 @@
 		<a class ="btn btn-primary" href="{% url 'blog.views.post_new' %}">Nuevo Post</a>
 
 
-		{% block content %}
-		{% endblock %}
-	</div>
+			</div>
+ {% block content %}
 
+      {% endblock %}
 
 
 </body>
