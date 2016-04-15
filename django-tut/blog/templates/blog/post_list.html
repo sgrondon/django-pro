@@ -2,14 +2,14 @@
 {% load crispy_forms_tags %}
 {% block content %}
         {% for post in posts %}
-        	<div class="row">
-        		<div class="col-md-4-xs-12">
-	        <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title|upper }}</a></h1> <!--{%} Template tags-->
-	        <p><i>{{ post.author }}</i></p>
-	        	</div>
-	        	<div class="col-md-8-xs-12">
-	        	<p>{{ post.create_date }}</p>
-	        	</div>
-        	</div>
+        <div class="row">
+		        	<div class="col-md-4-xs-12">
+			        <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title|upper }}</a></h1> <!--{%} Template tags-->
+			        <p><i>{{ post.author }}</i></p>
+			        </div>
+			     <div class="col-md-8-xs-12">
+			        	<p>{{ post.create_date }}</p>
+			      </div>
+        </div>
     	{% endfor %}
   {% endblock content %}

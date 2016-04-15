@@ -1,6 +1,9 @@
 h1{
-	
+	margin-left: 4em;
 	font-family: 'Lobster';
+}
+p{
+    margin-left:4em;
 }
 
 .alert{
