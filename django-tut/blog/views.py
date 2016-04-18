@@ -5,7 +5,7 @@ from .models import Post, Comment
 from .forms import PostForm, CommentForm
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-from django.views.generic import ListView, DetailView, CreateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 # Create your views here.
 
 class PostList(ListView):
@@ -77,18 +77,27 @@ class PostCreate(CreateView):
 #     return render(request, 'blog/post_edit.html', {'form': form})
 
 
-def post_edit(request, pk):
-        post = get_object_or_404(Post, pk=pk)
-        if request.method == "POST":
-            form = PostForm(request.POST, instance=post)
-            if form.is_valid():
-                post = form.save(commit=False)
-                post.author = request.user
-                post.save()
-                return redirect('post_detail', pk=post.pk)
-        else:
-            form = PostForm(instance=post)
-        return render(request, 'blog/post_edit.html', {'form': form, 'post' : post})
+# def post_edit(request, pk):
+#         post = get_object_or_404(Post, pk=pk)
+#         if request.method == "POST":
+#             form = PostForm(request.POST, instance=post)
+#             if form.is_valid():
+#                 post = form.save(commit=False)
+#                 post.author = request.user
+#                 post.save()
+#                 return redirect('post_detail', pk=post.pk)
+#         else:
+#             form = PostForm(instance=post)
+#         return render(request, 'blog/post_edit.html', {'form': form, 'post' : post})
+
+class PostEdit(UpdateView):
+        model = Post
+        fields = ['title', 'text']
+        template_name = 'blog/post_edit.html'
+
+    def get_success_url(self):
+        return reverse('post_list', kwargs={'pk' : self.object.pk})def get_success_url(self):
+
 
 @login_required(login_url='login')
 def post_delete(request, pk):
