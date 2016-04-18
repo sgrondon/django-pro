@@ -91,20 +91,21 @@ class PostCreate(CreateView):
 #         return render(request, 'blog/post_edit.html', {'form': form, 'post' : post})
 
 class PostEdit(UpdateView):
-        model = Post
-        fields = ['title', 'text']
-        template_name = 'blog/post_edit.html'
-
+    model = Post
+    fields = ['title', 'text']
+    template_name = 'blog/post_edit.html'
+    
     def get_success_url(self):
-        return reverse('post_detail', kwargs={'pk' : self.object.pk})def get_success_url(self):
+        return reverse('post_detail', kwargs={'pk' : self.object.pk})
 
-
-@login_required(login_url='login')
-def post_delete(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    post.delete()
-    return redirect('post_list')
+# @login_required(login_url='login')
+# def post_delete(request, pk):
+#     post = get_object_or_404(Post, pk=pk)
+#     post.delete()
+#     return redirect('post_list')
 
 class PostDelete(DeleteView):
     model = Post
-   
+    
+    def get_success_url(self):
+        return reverse('post_list')
