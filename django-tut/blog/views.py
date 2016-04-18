@@ -2,10 +2,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.core.urlresolvers import reverse
 from .models import Post, Comment
-from .forms import PostForm, CommentForm
+from .forms import CommentForm
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
+from django.http import HttpResponseForbidden, HttpResponseRedirect
 # Create your views here.
 
 class LoginRequiredMixin(object):
@@ -13,6 +14,9 @@ class LoginRequiredMixin(object):
     def as_view(cls, **initkwargs):
         view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
         return login_required(view, login_url='login')
+
+
+
 
 
 
@@ -26,6 +30,27 @@ class PostList(ListView):
 
 class PostDetail(DetailView):  
     model = Post
+
+    def get_context_data(self, **kwargs):
+        context = super(PostDetail, self).get_context_data(**kwargs)
+        context['comments'] = Comment.objects.filter(post=self.object).order_by('create_date')
+        context['form'] = CommentForm()
+        return context
+
+    def post(self, request, *args, **kwargs):
+
+        if request.user.is_authenticated():
+            form = CommentForm(request.POST)
+            post = self.get_object()
+            if form.is_valid():
+                comments = form.save(commit=False)
+                comments.author = request.user
+                comments.post = post
+                comments.save()
+                
+                return redirect('post_detail', pk=post.pk)
+        else:
+              return redirect('login')
 
 class PostCreate(LoginRequiredMixin, CreateView):
     model = Post

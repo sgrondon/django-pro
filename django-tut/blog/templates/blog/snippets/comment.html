@@ -1,5 +1,5 @@
 {% load crispy_forms_tags %}
-
+        <div class="container">
         	<div class="row">
         	<form method="POST" class="post-form">
         	{% csrf_token %} <!--Para seguridad-->
@@ -7,6 +7,7 @@
            <button type="submit" class="save btn btn-default">Save</button>
         	</form>
         	</div>
+        </div>
     		<div class="row">
     			{% for comment in comments %}	
 
