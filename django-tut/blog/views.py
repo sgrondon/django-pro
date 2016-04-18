@@ -1,6 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-
+from django.core.urlresolvers import reverse
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
 from django.shortcuts import redirect
@@ -23,12 +23,15 @@ class PostCreate(CreateView):
     model = Post
     fields = ['title','text']
     template_name = 'blog/post_edit.html'
-    success_url = '/'
+   
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         form.instance.published_date = timezone.now()
         return super(PostCreate, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('post_detail', kwargs={'pk' : self.object.pk})
 
 #def post_list(request):
  #   posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
@@ -82,7 +85,7 @@ def post_edit(request, pk):
                 post = form.save(commit=False)
                 post.author = request.user
                 post.save()
-                return redirect('blog.views.post_detail', pk=post.pk)
+                return redirect('post_detail', pk=post.pk)
         else:
             form = PostForm(instance=post)
         return render(request, 'blog/post_edit.html', {'form': form, 'post' : post})
