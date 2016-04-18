@@ -96,7 +96,7 @@ class PostEdit(UpdateView):
         template_name = 'blog/post_edit.html'
 
     def get_success_url(self):
-        return reverse('post_list', kwargs={'pk' : self.object.pk})def get_success_url(self):
+        return reverse('post_detail', kwargs={'pk' : self.object.pk})def get_success_url(self):
 
 
 @login_required(login_url='login')
