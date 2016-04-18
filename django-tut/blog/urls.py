@@ -1,6 +1,7 @@
 from django.conf.urls import include, url
 from . import views
 from django.views.generic import TemplateView
+from django.contrib.auth.decorators import login_required
 
 
 urlpatterns = [

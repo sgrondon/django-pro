@@ -8,6 +8,14 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 # Create your views here.
 
+class LoginRequiredMixin(object):
+    @classmethod
+    def as_view(cls, **initkwargs):
+        view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
+        return login_required(view, login_url='login')
+
+
+
 class PostList(ListView):
     model = Post
     context_object_name = "posts"
@@ -19,7 +27,7 @@ class PostList(ListView):
 class PostDetail(DetailView):  
     model = Post
 
-class PostCreate(CreateView):
+class PostCreate(LoginRequiredMixin, CreateView):
     model = Post
     fields = ['title','text']
     template_name = 'blog/post_edit.html'
@@ -98,13 +106,13 @@ class PostEdit(UpdateView):
     def get_success_url(self):
         return reverse('post_detail', kwargs={'pk' : self.object.pk})
 
-# @login_required(login_url='login')
+#@login_required(login_url='login')
 # def post_delete(request, pk):
 #     post = get_object_or_404(Post, pk=pk)
 #     post.delete()
 #     return redirect('post_list')
 
-class PostDelete(DeleteView):
+class PostDelete(LoginRequiredMixin, DeleteView):
     model = Post
     
     def get_success_url(self):
