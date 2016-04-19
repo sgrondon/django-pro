@@ -16,10 +16,10 @@
                     <p>{{ comment.author }}</p>
             <div>
             <p>
-            <a href="{% url 'comment_like' pk=comment.pk %}" class="glyphicon glyphicon-thumbs-up"></a>
-            {{ comment.likes }} 
+            <a href="{% url 'comment_like' pk=comment.pk %}" class="btn btn-default glyphicon glyphicon-thumbs-up"></a>
+            {{ comment.likes }}
                     | 
-            <a href="{% url 'comment_dislike' pk=comment.pk %}" class="glyphicon glyphicon-thumbs-down"></a> {{ comment.dislikes }}
+            <a href="{% url 'comment_dislike' pk=comment.pk %}" class="btn btn-default glyphicon glyphicon-thumbs-up" ></a> {{ comment.dislikes }}
             </p>
             
             </div>
