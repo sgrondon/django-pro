@@ -22,6 +22,16 @@ class Comment(models.Model):
     post = models.ForeignKey(Post)
     text = models.TextField()
     create_date = models.DateTimeField(default=timezone.now)
+    likes = models.IntegerField(default=0)
+    dislikes = models.IntegerField(default=0)
 
     def __str__(self):
         return self.text
+
+    def like(self):
+        self.likes += 1
+        self.save() #GUardar en la base de datos
+
+    def dislike(self):
+        self.dislikes += 1
+        self.save() #GUardar en la base de datos
